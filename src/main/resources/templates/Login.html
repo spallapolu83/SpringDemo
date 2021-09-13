@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<style>
+    #userName{
+			width: 300px;
+			margin-top: 10px;
+			margin-left: 5px;
+			padding-left: 10px;
+			border: 1px solid grey;
+			border-radius: 5px;
+		}
+        #password{
+			width: 305px;
+			margin-top: 10px;
+			margin-left: 5px;
+			padding-left: 10px;
+			border: 1px solid grey;
+			border-radius: 5px;
+		}
+    #userName-warning-message{	
+			padding-left: 640px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+        #password-warning-message{	
+			padding-left: 640px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+</style>
+
+<body>
+		<script type="text/javascript">
+           $(document).ready(function(){
+            $('#userName-warning-message').hide();
+            $('#password-warning-message').hide();
+           });
+           
+           function userValidation(){
+               	
+                if($('#userName').val() == ''){
+                    $('#userName-warning-message').show();
+					$('#userName-warning-message').html("Please Enter Your User Name !");
+                    return false;
+                } else{
+                    $('#userName-warning-message').hide();
+                    return true;
+                }
+
+                if($('#password').val() == ''){
+                    $('#password-warning-message').show();
+					$('#password-warning-message').html("Please Enter Your Password !");
+                    return false;
+                } else{
+                    $('#password-warning-message').hide();
+                    return true;
+                }
+                
+			}
+        </script>
+    <div class="container">
+        <h3>EMPLOYEE LOGIN PAGE</h3>
+        <span class="text-center font-weight-bold font-color-red" th:text="${userFailure}"></span>
+        <form th:action="@{/user/login}" method="POST" th:object="${user}">
+            <div class="row">
+                <label for="username">Username : </label>
+                <div class="col-6">
+                    <input type="text" name="userName" id="userName" class="form-control"/>
+                </div>
+            </div>
+            <div id="span-container">
+                <span id="userName-warning-message" class="text-danger"> </span>
+            </div>
+            <div id="span-container">
+                <span id="password-warning-message" class="text-danger"> </span>
+            </div>
+            <div class="row">
+                Password : 
+                <div class="col-6">
+                    <input type="password" name="password" id="password" class="form-control"/>
+                </div> 
+            </div> 
+            <div class="row">  
+                <div class="col-8">               
+                    <button type="submit" onclick="return userValidation();" class="btn btn-success">Login</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <a href="register">Please register HERE</a>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+    <!-- container end -->
+</body>
+
+</html>
